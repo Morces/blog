@@ -6,7 +6,8 @@ from flask_login import current_user, login_required
 
 from app.main.forms import EditProfile, WriteForm
 
-from . import main,db
+from . import main
+from .. import db
 from app.models import Posts, User
 from app.requests import get_quotes
 
