@@ -4,6 +4,7 @@ from flask_script import Manager, Server
 from app import create_app, db
 from app.models import Posts, User
 
+
 # Creating app instance
 app = create_app('production')
 manager = Manager(app)

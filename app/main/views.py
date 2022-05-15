@@ -1,7 +1,6 @@
-
-from email.mime import image
 import os
 import secrets
+from turtle import pos
 from flask import flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
@@ -12,7 +11,7 @@ from app.models import Posts, User
 from app.requests import get_quotes
 
 
-main.route('/')
+@main.route('/')
 def index():
     posts = Posts.query.all()
 
@@ -70,6 +69,19 @@ def profile():
     form.bio.data = current_user.bio
 
     return render_template('userprof.html', form=form, image=image_file, user=user, posts=posts)
-    
+
+@main.route('/post/<int:post_id>')
+def post(post_id):
+    posts = Posts.query.get_or_404(post_id)
+
+    return render_template('post.html', posts = posts)
+
+@main.route('/post/<init:post_id>/delete')
+def delete(post_id):
+    post  = Posts.query.get_or_404(post_id)
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect(url_for('main.account'))
 
 

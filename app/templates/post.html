@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+    <article>
+        <div class="head">
+            <h2>{{posts.title}}</h2>
+            <p>{{posts.content}}</p>
+            <small>{{posts.author.username}}</small>
+            <small>{{post.timestamp.strftime('%m/%d/%Y')}}</small>
+        </div>
+        <div class="delete">
+            <a href="{{url_for('main.delete', post_id = posts.id)}}">
+                <button class="btn btn-danger" type="button">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </a>
+        </div>
+    </article>
+
+</div>
+
+{% endblock %}
+
