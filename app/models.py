@@ -1,4 +1,5 @@
 from datetime import datetime
+from email.policy import default
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 from app import db
@@ -10,8 +11,11 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), nullable = False)
     email = db.Column(db.String(), nullable = False)
     password = db.Column(db.String(80))
-
-
+    bio = db.Column(db.String(255), default = 'Your bio is empty')
+    image_url = db.Column(db.String(), default = '')
+    posts = db.relationship('Posts', backref = 'author', lazy = 'dynamic')
+    comments = db.relationship('Comments', backref = 'commentator', lazy = 'dynamic')
+    
 
     @property
     def password(self):
