@@ -1,0 +1,37 @@
+{% extends .base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/edit.css')}}">
+{% endblock %}
+
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="profile">
+                <div class="image">
+                    <img class="rounded circle" src="{{img}}" alt="">
+                </div>
+                <h2>{{current_user.username}}</h2>
+                <p class="mail">{{current_user.email}}</p>
+                <small>{{current_user.bio}}</small>
+            </div>
+            <div class="edit">
+                <h2>Edit Profile</h2>
+                <hr>
+                {{wtf.quick_form(form)}}
+            </div>
+        </div>
+        <div class="col-md-5">
+            <h2 class="text-center">My stories</h2>
+            <hr>
+            { % for post in posts %}
+            <p>{{post.author.posts}}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{$% endblock %}

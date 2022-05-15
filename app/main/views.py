@@ -1,11 +1,14 @@
-import imp
+
+from email.mime import image
+import os
+import secrets
 from flask import flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
-from app.main.forms import WriteForm
+from app.main.forms import EditProfile, WriteForm
 
 from . import main,db
-from app.models import Posts
+from app.models import Posts, User
 from app.requests import get_quotes
 
 
@@ -37,3 +40,36 @@ def account():
     posts = Posts.query.all()
     image = current_user.image_url
     return render_template('account.html', quotes=quotes, posts=posts,image=image)
+
+def save_pic(form_picture):
+    random_hex = secrets.token_hex(8)
+    fn_ext = os.path.splitext(form_picture.filename)
+    picture_fn = fn_ext
+    pic_full_path = os.path.join('app/static/img')
+    form_picture.save(pic_full_path)
+    return picture_fn
+
+
+@main.route('/profile', methos=['GET', 'POST'])
+@login_required
+def profile():
+    form = EditProfile()
+    image_file = url_for('static', filename='img'+'')
+    posts = Posts.query.all()
+    user = User.query.filter_by(username=current_user.username).first
+    if form.validate_on_submit():
+        if form.picture_upload.data:
+            picture_file = save_pic(form.picture_upload.data)
+            current_user.image_url = picture_file
+            current_user.username = form.user.data
+            current_user.bio = form.bio.data
+            db.session.add()
+            db.session.commit()
+            flash('Account updated Successfully!')
+    form.user.data = current_user.username
+    form.bio.data = current_user.bio
+
+    return render_template('userprof.html', form=form, image=image_file, user=user, posts=posts)
+    
+
+
