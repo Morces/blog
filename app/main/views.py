@@ -27,3 +27,5 @@ def write():
 
     posts = Posts.query.all()
     return render_template('write.html', form = form, posts=posts)
+
+

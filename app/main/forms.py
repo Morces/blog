@@ -1,10 +1,10 @@
+from app.models import User
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField, TextAreaField
-from wtforms.validators import InputRequired, ValidationError
 from flask_wtf.file import FileAllowed, FileField
+from wtforms import StringField, SubmitField, TextAreaField
+from wtforms.validators import InputRequired, ValidationError
 
-from app.models import User
 
 class WriteForm(FlaskForm):
     title = StringField('Title', validators=[InputRequired()])
