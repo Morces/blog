@@ -1,9 +1,9 @@
 from ..import db
 from flask_bcrypt import bcrypt
-from flask import redirect, render_template, url_for
-from flask_login import current_user
+from flask import flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required, login_user, logout_user
 
-from app.auth.forms import RegisterForm
+from app.auth.forms import LoginForm, RegisterForm
 from app.models import User
 from . import auth
 
@@ -23,3 +23,29 @@ def register():
         return redirect(url_for('auth/login'))
 
     return render_template('auth/register.html', form = form)
+
+
+@auth.route('/login', methods=["GET", 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password,form.password.data):
+            login_user(user, remember=form.remember_me.data)
+            next = request.args.get('next')
+            if next is None or not next.startswith('/'):
+                next = url_for('main.index')
+
+            return redirect(url_for('main.account'))
+        flash ('Invalid username or Password!')
+
+    return render_template('auth/login.html', form=form)
+
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return render_template('index.html')
