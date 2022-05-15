@@ -1,3 +1,4 @@
+import imp
 from flask import flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
@@ -5,6 +6,7 @@ from app.main.forms import WriteForm
 
 from . import main,db
 from app.models import Posts
+from app.requests import get_quotes
 
 
 main.route('/')
@@ -28,4 +30,10 @@ def write():
     posts = Posts.query.all()
     return render_template('write.html', form = form, posts=posts)
 
-
+@main.route('/account')
+@login_required
+def account():
+    quotes = get_quotes()
+    posts = Posts.query.all()
+    image = current_user.image_url
+    return render_template('account.html', quotes=quotes, posts=posts,image=image)

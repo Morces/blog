@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{message}}
+        </div>
+{% endfor %}
+{% endif%}
+{% endwith %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <h2>Hello {{current_user.username}}</h2>
+            <h4>Quote of the Day!</h4>
+            <p><article>{{quotes.quote}}</article></p>
+            <small>By:{{quotes.author}}</small>
+            <hr>
+            <h2 class="text-center">Pick a Topic</h2>
+            {% for post in posts %}
+            <h2><a href="{{url_for('main.post', post_id=post.id)}}">{{post.title}}</a></h2>
+            <p>{{post.content}}</p>
+            <small>{{post.author.username}}...</small>
+            <small>from your network</small><br>
+            <small>{{post.timestamp}}</small>
+            <p><a href="">Comment</a></p>
+            <hr>
+            {% endfor%}
+        </div>
+        <div class="col-md-5">
+            <hr>
+            <div class="foot"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
