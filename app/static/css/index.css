@@ -13,7 +13,7 @@ section h1 {
     transition: background 0.3s ease-out;
 }
 .navbar-brand {
-    font-size: 40px;
+    font-size: 60px;
    
 }
 .navbar-brand i { margin-right: 12px; }
@@ -61,7 +61,6 @@ section h1 {
   .nav-tabs .nav-link.active {
     background: transparent;
     border-color: transparent;
-    border-bottom-color: #38b083;
     color: #000000;
   }
 
@@ -161,7 +160,10 @@ section.hero {
     padding-top: 120px;
     padding-bottom: 60px;
     position: relative;
-    /* background-image: url(/app/static/img/blog.png); */
+    /* background-image: url('/static/img/blog.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover; */
   }
   
   .heroText {
@@ -178,7 +180,11 @@ section.hero {
   }
   
   .overlay {
-    background: rgba(10, 10, 10, 0.603);
+    background-color: rgba(10, 10, 10, 0.671);
+    background-image: url('/static/img/surface-71_s6RDJpGc-unsplash.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
     position: absolute;
     top: 0;
     right: 0;
