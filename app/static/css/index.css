@@ -2,7 +2,7 @@ body {
     font-family: 'Karla', sans-serif;
 }
 section h1 {
-    font-weight: 600;
+    font-weight: 400;
     line-height: normal;
     font-size: 68px;
 }
@@ -178,13 +178,13 @@ section.hero {
   }
   
   .overlay {
-    background: rgba(75, 76, 77, 0.5);
+    background: rgba(10, 10, 10, 0.603);
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     pointer-events: none;
-    height: 80vh;
+    
   }
   
