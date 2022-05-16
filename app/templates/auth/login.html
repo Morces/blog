@@ -11,24 +11,39 @@
 {%  block content %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-<div class="container"> 
-  <div class="card">
-    <br>
-    <div class= "col-md-2"> </div>
-    <div class="col-md-8">
-    <!--Flash message -->
-    {% for message in get_flashed_messages() %}
-      <div class="alert alert-danger">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      {{ message }}
+
+
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <div class="login100-pic">
+        <img src="/static/img/img-01.png" alt="IMG">
       </div>
-    {% endfor %}
-    <!-- Login form -->
-    {{wtf.quick_form(form)}}
-    <br><br>
-    <p> Don't have an account? <a href="{{url_for('auth.register')}}">Sign up here</a></p>
-   </div>
-   <div clas="col-md-2"> </div>
+
+      <div class="login100-form validate-form">
+        <span class="login100-form-title">
+          Login Here
+        </span>
+
+        <!-- Flash message -->
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ message }}
+        </div>
+        {% endfor %}
+        <!-- Login form -->
+        {{wtf.quick_form(form)}}
+        <br>
+        <div class="sign">
+          <p>Don't have an account?</p>
+          <a class="txt2" href="{{url_for('auth.register')}}">
+            Sign Up here
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

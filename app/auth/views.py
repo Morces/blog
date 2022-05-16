@@ -1,5 +1,5 @@
-from ..import db
-from flask_bcrypt import bcrypt
+from ..import db,bcrypt
+# from flask_bcrypt import bcrypt
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
@@ -33,12 +33,9 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password,form.password.data):
+        if user and bcrypt.check_password_hash(user.password_hush, form.password.data):
             login_user(user, remember=form.remember_me.data)
-            next = request.args.get('next')
-            if next is None or not next.startswith('/'):
-                next = url_for('main.index')
-
+            
             return redirect(url_for('main.account'))
         flash ('Invalid username or Password!')
 

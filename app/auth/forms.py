@@ -6,11 +6,11 @@ from app.models import User
 
 
 class RegisterForm(FlaskForm):
-    username = StringField('Username', validators=[InputRequired()])
-    email = StringField('Enter your email', validators=[InputRequired(), Email()])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=8)])
-    confirm_password = PasswordField('Confirm password', validators=[InputRequired(), EqualTo('Confirm_password', message='Passwords do not match')])
-    submit = SubmitField('Register')
+    email = StringField('Your Email Address', validators=[InputRequired(),Email()])
+    username = StringField('Enter your username', validators=[InputRequired()])
+    password = PasswordField('Password', validators=[InputRequired(),Length(min=6),EqualTo('password_confirm', message='Passwords do not match')])
+    password_confirm  = PasswordField('Confirm Passwords',validators=[InputRequired()])
+    submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()

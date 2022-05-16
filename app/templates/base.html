@@ -40,7 +40,7 @@
     <nav class="navbar fixed-top navbar-expand-lg">
         <div class="container">
 
-            <a href="#" class="navbar-brand">
+            <a href="/" class="navbar-brand" style="font-size: 35px;">
                 <i class="bi-layers"></i> BLOG
             </a>
 
@@ -54,30 +54,44 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-lg-5">
+                <ul class="navbar-nav ms-lg-5 pull-right">
+
                     <li class="nav-item">
-                        <a class="nav-link" href="">Home</a>
+                        <a class="nav-link" href="/">Home</a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
                     </li>
 
+                    {% if current_user.is_authenticated %}
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Write</a>
+                        <a class="nav-link" href="{{url_for('main.account')}}">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('main.write')}}">Write</a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('main.profile')}}"> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('auth.logout')}}">Log out</a>
+                    </li>
+
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('main.write')}}">Write</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="">Log out</a>
+                        <a class="nav-link" href="{{url_for('auth.login')}}">Log in</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="">Log in</a>
+                        <a class="nav-link" href="{{url_for('auth.register')}}">Sign Up</a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Sign Up</a>
-                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

@@ -1,12 +1,13 @@
-from flask_bcrypt import Bcrypt
+from flask_wtf.csrf import CSRFProtect
 from flask import Flask 
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from config import config_options
+from flask_bcrypt import Bcrypt
 
-
-bcrypt= Bcrypt()
+bcrypt = Bcrypt()
+csrf = CSRFProtect()
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -31,6 +32,7 @@ def create_app(config_name):
     bootstrap.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
+    csrf.init_app(app)
     bcrypt.init_app(app)
 
     return app 

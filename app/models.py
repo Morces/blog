@@ -14,26 +14,26 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key = True)
     username = db.Column(db.String(20), nullable = False)
     email = db.Column(db.String(), nullable = False)
-    password = db.Column(db.String(80))
+    password_hush = db.Column(db.String(80))
     bio = db.Column(db.String(255), default = 'Your bio is empty')
     image_url = db.Column(db.String(), default = '')
     posts = db.relationship('Posts', backref = 'author', lazy = 'dynamic')
     comments = db.relationship('Comments', backref = 'commentator', lazy = 'dynamic')
     
 
-    @property
-    def password(self):
-        raise AttributeError('password is not a readable input')
+    # @property
+    # def password(self):
+    #     raise AttributeError('password is not a readable input')
 
-    @password.setter
-    def password(self,password):
-        self.password_hush = generate_password_hash(password)
+    # @password.setter
+    # def password(self,password):
+    #     self.password_hush = generate_password_hash(password)
 
-    def verify_password(self,password):
-        return check_password_hash(self.password_hush,password)
+    # def verify_password(self,password):
+    #     return check_password_hash(self.password_hush,password)
 
-    def __repr__(self) -> str:
-        return '<User %r>' % self.username
+    # def __repr__(self) -> str:
+    #     return '<User %r>' % self.username
 
 
 
