@@ -1,22 +1,20 @@
 import os
 import secrets
-from turtle import pos
 from flask import flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
 from app.main.forms import EditProfile, WriteForm
-
-from . import main
-from .. import db
 from app.models import Posts, User
 from app.requests import get_quotes
+from .. import db
+from . import main
 
 
 @main.route('/')
 def index():
     posts = Posts.query.all()
 
-    return render_template('index.html',posts=posts)
+    return render_template('index.html', posts=posts)
 
 @main.route('/publish/new', methods = ['GET', 'POST'])
 @login_required
@@ -50,7 +48,7 @@ def save_pic(form_picture):
     return picture_fn
 
 
-@main.route('/profile', methos=['GET', 'POST'])
+@main.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
     form = EditProfile()
@@ -71,13 +69,13 @@ def profile():
 
     return render_template('userprof.html', form=form, image=image_file, user=user, posts=posts)
 
-@main.route('/post/<int:post_id>')
+@main.route('/post/<post_id>')
 def post(post_id):
     posts = Posts.query.get_or_404(post_id)
 
     return render_template('post.html', posts = posts)
 
-@main.route('/post/<init:post_id>/delete')
+@main.route('/post/<post_id>/delete')
 def delete(post_id):
     post  = Posts.query.get_or_404(post_id)
     db.session.delete(post)

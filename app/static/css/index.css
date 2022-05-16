@@ -14,8 +14,11 @@ section h1 {
 }
 .navbar-brand {
     font-size: 40px;
-    color: #FFFFFF;
+   
 }
+.navbar-brand i { margin-right: 12px; }
+
+.backstretch { max-width: 99.99%; }
 
 .navbar-expand-lg .navbar-nav .nav-link {
     padding-right: 25px;
@@ -23,16 +26,51 @@ section h1 {
   }
   
   .navbar-nav .nav-link {
-    color: #FFFFFF;
+    /* color: #FFFFFF; */
     font-size: 18px;
     font-weight: 400;
     padding-top: 15px;
     padding-bottom: 15px;
   }
+  .nav-tabs .nav-link {
+    background: transparent;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    color: #dee2e6;
+    font-weight: 600;
+    margin: auto;
+    position: relative;
+    top: 1px;
+  }
+  .sticky-nav {
+    background: #FFFFFF;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
+  }
   
+  .sticky-nav .navbar-brand {
+    color: #000000;
+  }
+  
+  .sticky-nav .navbar-nav .nav-link {
+    color: #717275;
+  }
+  
+  .nav-tabs .nav-link:hover,
+  .nav-tabs .nav-item.show .nav-link, 
+  .nav-tabs .nav-link.active {
+    background: transparent;
+    border-color: transparent;
+    border-bottom-color: #38b083;
+    color: #000000;
+  }
+
+
+
   .navbar-nav .nav-link.active, 
   .navbar-nav .nav-link:hover {
     color: #38b083;
+    text-decoration: none;
   }
   
   .navbar-toggler {
@@ -110,24 +148,26 @@ a:hover{
 }
 .custom-btn {
     background: #38b083;
-    color: #FFFFFF;
+    color: white;
     font-size: 16px;
     font-weight: 600;
     padding: 12px 24px;
 }
 .custom-btn:hover {
-    background: black;
+    background: rgb(32, 32, 32);
     color: #FFFFFF;
 }
-.hero {
+section.hero {
     padding-top: 120px;
     padding-bottom: 60px;
     position: relative;
+    /* background-image: url(/app/static/img/blog.png); */
   }
   
   .heroText {
     position: relative;
     z-index: 2;
+    
   }
   
   @media screen and (min-width: 991px) {
@@ -138,11 +178,13 @@ a:hover{
   }
   
   .overlay {
-    background: rgba(128,142,176, 0.5);
+    background: rgba(75, 76, 77, 0.5);
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     pointer-events: none;
+    height: 80vh;
   }
+  

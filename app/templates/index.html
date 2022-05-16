@@ -1,27 +1,33 @@
 {% extends 'base.html' %}
+
+
 {% block css%}
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
 {% endblock %}
+
+{% block script %}
+<script src="{{url_for('static', filename = 'js/script.js')}}"></script>
+{% endblock script %}
+
+
 
 {% block content %}
 <html>
     <body>
         <section class="hero d-flex justify-content-center align-items-center" id="section_1">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-12">
+                    <div class="text-center">
                         <div class="heroText">
                             <h1 class="text-white mb-lg-5 mb-4">Welcome to this Blog, A place where you can write any content and leave a comment of your liking. I hope you enjoy it!!</h1>
                             <div class="ms-auto d-none d-lg-block">
-                                <a href="{{url_for('main.write')}}">
-                                    <button class="custom-btn btn btn-lg">
-                                        Get Started
-                                    </button>
+                                <a href="{{url_for('main.write')}}" class="custom-btn btn btn-lg">
+                                    Get Started
                                 </a>
                             </div>
                         </div>
                     </div>
-
+                   
                 </div>
             </div>
 
@@ -30,7 +36,12 @@
         <section id="about">
 
         </section>
+
+
+        
     </body>
 </html>
+
+
 
 {% endblock %}

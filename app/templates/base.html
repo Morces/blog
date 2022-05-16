@@ -20,6 +20,14 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
     {% endblock %}
 
+    <!-- js -->
+    {% block script %}
+    <!-- JavaScript Bundle with Popper -->
+    <script src="{{url_for('static', filename = 'js/script.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    {% endblock %}
+    
+
     {% extends 'bootstrap/base.html' %}
     {% block title %}
     blog
@@ -36,9 +44,9 @@
                 <i class="bi-layers"></i> BLOG
             </a>
 
-            <a href="#" class="custom-btn btn btn-lg d-lg-none ms-auto me-4">
-                Download
-                <i class="bi-download ms-2"></i>
+            <a href="{{url_for('main.write')}}" class="custom-btn btn btn-lg d-lg-none ms-auto me-4">
+                Get Started
+                
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,12 +90,5 @@
 
 
 
-
-
-    <!-- js -->
-    {% block script %}
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    {% endblock %}
 </body>
 </html>

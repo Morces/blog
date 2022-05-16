@@ -9,7 +9,7 @@ class Config():
 class DevConfig(Config):
 
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:morces@localhost/blog'
-    
+    DEBUG = True 
 
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:morces@localhost/blog_test'
