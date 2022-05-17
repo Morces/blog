@@ -1,4 +1,5 @@
 from datetime import datetime
+from enum import unique
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 from . import db, login_manager
@@ -14,26 +15,37 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key = True)
     username = db.Column(db.String(20), nullable = False)
     email = db.Column(db.String(), nullable = False)
-    password_hush = db.Column(db.String(80))
+    # password = db.Column(db.String(300), nullable = False)
+    pwd = db.Column(db.String(300), nullable=False, unique=True)
     bio = db.Column(db.String(255), default = 'Your bio is empty')
     image_url = db.Column(db.String(), default = '')
     posts = db.relationship('Posts', backref = 'author', lazy = 'dynamic')
     comments = db.relationship('Comments', backref = 'commentator', lazy = 'dynamic')
+
+
+    # def __init__(self,email, username, pwd):
+    #     self.email=email
+    #     self.username=username
+    #     self.pwd=generate_password_hash(pwd)
+        
+
+
     
 
     # @property
-    # def password(self):
+    # def pwd(self):
     #     raise AttributeError('password is not a readable input')
 
     # @password.setter
-    # def password(self,password):
-    #     self.password_hush = generate_password_hash(password)
-
+    # def password(self,pwd):
+    #     self.pwd = generate_password_hash(pwd)
+        
     # def verify_password(self,password):
-    #     return check_password_hash(self.password_hush,password)
+    #     return check_password_hash(self.pwd, password)
 
-    # def __repr__(self) -> str:
-    #     return '<User %r>' % self.username
+
+    def __repr__(self):
+        return '<User %r>' % self.username
 
 
 

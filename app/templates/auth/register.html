@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block css %}
-<link rel="stylesheet" href="{{url_for('static',filename = 'css/login.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename = 'css/index.css')}}">
 {% endblock %}
 
 {% import 'bootstrap/wtf.html' as wtf %}
@@ -23,6 +23,7 @@
           <!-- SignUp form -->
           {{wtf.quick_form(form)}}
           <br>
+          <p>Alraedy have an account? <a href="{{url_for('auth.login')}}" class="text-dark">Log In</a></p>
           
         </div>
       </div>

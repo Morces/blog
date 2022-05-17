@@ -1,8 +1,8 @@
 from ..import db,bcrypt
-# from flask_bcrypt import bcrypt
-from flask import flash, redirect, render_template, request, url_for
+# from flask_bcrypt import Bcrypt
+from flask import flash, redirect, render_template, url_for
 from flask_login import current_user, login_required, login_user, logout_user
-
+from werkzeug.security import check_password_hash, generate_password_hash
 from app.auth.forms import LoginForm, RegisterForm
 from app.models import User
 from . import auth
@@ -16,11 +16,24 @@ def register():
         return redirect('main.index')
     form  = RegisterForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username = form.username.data, email = form.email.data, password = hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        return redirect(url_for('auth/login'))
+        
+        try:
+            username = form.username.data
+            email = form.email.data
+            pwd = form.pwd.data
+                              
+            
+            user = User(username = username, email=email, pwd=pwd)
+            
+            db.session.add(user)
+            db.session.commit()
+
+
+
+            flash (f'Account Successfully Created!! Welcome')
+            return redirect(url_for('auth/login'))
+        except Exception as e:
+            flash(e, "danger")
 
     return render_template('auth/register.html', form = form)
 
@@ -32,12 +45,19 @@ def login():
 
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password_hush, form.password.data):
-            login_user(user, remember=form.remember_me.data)
-            
-            return redirect(url_for('main.account'))
-        flash ('Invalid username or Password!')
+        try:
+            user = User.query.filter_by(email=form.email.data).first()
+
+            if user is not None and user.pwd == form.pwd.data:
+
+                
+            # if check_password_hash(user.password, form.password.data):
+                login_user(user, form.remember_me.data)
+            else:
+                flash("Invalid username or Password")
+        except Exception as e:
+            flash(e, "danger")
+
 
     return render_template('auth/login.html', form=form)
 
@@ -45,4 +65,4 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return render_template('index.html')
+    return redirect(url_for('auth.login'))

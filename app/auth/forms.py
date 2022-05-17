@@ -8,7 +8,7 @@ from app.models import User
 class RegisterForm(FlaskForm):
     email = StringField('Your Email Address', validators=[InputRequired(),Email()])
     username = StringField('Enter your username', validators=[InputRequired()])
-    password = PasswordField('Password', validators=[InputRequired(),Length(min=6),EqualTo('password_confirm', message='Passwords do not match')])
+    pwd = PasswordField('Password', validators=[InputRequired(),Length(8, 72),EqualTo('password_confirm', message='Passwords do not match')])
     password_confirm  = PasswordField('Confirm Passwords',validators=[InputRequired()])
     submit = SubmitField('Sign Up')
 
@@ -24,6 +24,6 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[InputRequired(), Email()])
-    password  = PasswordField('Password', validators=[InputRequired()])
+    pwd  = PasswordField('Password', validators=[InputRequired(), Length(8, 72)])
     remember_me = BooleanField('Keep me logged in')
     submit = SubmitField('Log In')

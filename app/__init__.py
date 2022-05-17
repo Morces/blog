@@ -5,7 +5,10 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from config import config_options
 from flask_bcrypt import Bcrypt
+from flask_migrate import Migrate
 
+
+migrate = Migrate()
 bcrypt = Bcrypt()
 csrf = CSRFProtect()
 bootstrap = Bootstrap()
@@ -13,6 +16,9 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.session_protection='strong'
 login_manager.login_view='auth.login'
+login_manager.login_message_category='info'
+
+
 
 def create_app(config_name):
 
@@ -34,5 +40,7 @@ def create_app(config_name):
     login_manager.init_app(app)
     csrf.init_app(app)
     bcrypt.init_app(app)
+    migrate.init_app(app)
+    
 
     return app 

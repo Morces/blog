@@ -1,7 +1,7 @@
-{% extends .base.html' %}
+{% extends 'base.html' %}
 
 {% block css %}
-<link rel="stylesheet" href="{{url_for('static', filename = 'css/edit.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/index.css')}}">
 {% endblock %}
 
 {% import 'bootstrap/wtf.html' as wtf %}
@@ -27,11 +27,11 @@
         <div class="col-md-5">
             <h2 class="text-center">My stories</h2>
             <hr>
-            { % for post in posts %}
+            {% for post in posts %}
             <p>{{post.author.posts}}</p>
             {% endfor %}
         </div>
     </div>
 </div>
 
-{$% endblock %}
+{% endblock %}

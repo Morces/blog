@@ -17,7 +17,7 @@ class Config():
 
 class DevConfig(Config):
 
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:morces@localhost/blog'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:morces@localhost/bllogg'
     DEBUG = True 
 
 class TestConfig(Config):
