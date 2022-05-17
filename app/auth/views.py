@@ -31,7 +31,7 @@ def register():
 
 
             flash (f'Account Successfully Created!! Welcome')
-            return redirect(url_for('auth/login'))
+            return redirect(url_for('main.index'))
         except Exception as e:
             flash(e, "danger")
 

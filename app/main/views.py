@@ -16,7 +16,7 @@ def index():
 
     return render_template('index.html', posts=posts)
 
-@main.route('/publish/new', methods = ['GET', 'POST'])
+@main.route('/new', methods = ['GET', 'POST'])
 @login_required
 def write():
     form = WriteForm()

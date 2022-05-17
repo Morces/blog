@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 
+{% block css%}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
-<div class="container">
+<div class="card">
     <div class="heading">
-        <h2>Let's Know What's In Your Mind</h2>
+        <h2 class="text-center">Let's Know What's In Your Mind</h2>
     </div>
-    {{wtf.quik_form(form)}}
+    {{wtf.quick_form(form)}}
 </div>
 
 {% endblock %}
