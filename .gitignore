@@ -67,6 +67,7 @@ instance/
 .webassets-cache
 start.sh
 virtual/
+migrations/
 
 # Scrapy stuff:
 .scrapy
